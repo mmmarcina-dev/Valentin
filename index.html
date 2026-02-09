@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Budeš môj valentín?</title>
+<title>Martina ❤️</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#ff4b5c">
 
@@ -34,22 +34,29 @@ border-radius:10px;
 cursor:pointer;
 }
 
-#yesBtn{background:#4CAF50;color:white;}
+#yesBtn{background:#4CAF50;color:white;transition:0.2s;}
 #noBtn{background:#ff3b3b;color:white;position:absolute;}
 
 #catBox{display:none;margin-top:20px;}
 #catBox img{width:250px;border-radius:10px;}
+
+.heart{
+position:fixed;
+font-size:30px;
+animation:floatUp 2s linear forwards;
+}
+
+@keyframes floatUp{
+from{transform:translateY(0);opacity:1;}
+to{transform:translateY(-200px);opacity:0;}
+}
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <div class="card" id="card">
-<h1>Budeš môj valentín? ❤️</h1>
+<h1>Martina, budeš môj valentín? ❤️</h1>
 <button id="yesBtn">Áno</button>
 <button id="noBtn">Nie</button>
 
@@ -74,7 +81,7 @@ const catBox=document.getElementById('catBox');
 
 function moveNo(){
 attempts++;
-yesSize+=0.2;
+yesSize+=0.25;
 yesBtn.style.transform=`scale(${yesSize})`;
 
 const rect=card.getBoundingClientRect();
@@ -90,12 +97,4 @@ catBox.style.display="block";
 }
 
 noBtn.addEventListener("mouseover",moveNo);
-noBtn.addEventListener("click",moveNo);
-
-yesBtn.onclick=()=>{
-card.innerHTML="<h1>YEESSS ❤️</h1><h2>Milujem ťa 😍</h2>";
-}
-</script>
-
-</body>
-</html>
+no
