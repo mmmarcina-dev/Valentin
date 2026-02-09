@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Martina ❤️</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff4b5c">
 
 <style>
 body{
@@ -24,6 +22,7 @@ padding:40px;
 border-radius:20px;
 text-align:center;
 position:relative;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 button{
@@ -34,11 +33,27 @@ border-radius:10px;
 cursor:pointer;
 }
 
-#yesBtn{background:#4CAF50;color:white;transition:0.2s;}
-#noBtn{background:#ff3b3b;color:white;position:absolute;}
+#yesBtn{
+background:#4CAF50;
+color:white;
+transition:0.2s;
+}
 
-#catBox{display:none;margin-top:20px;}
-#catBox img{width:250px;border-radius:10px;}
+#noBtn{
+background:#ff3b3b;
+color:white;
+position:absolute;
+}
+
+#catBox{
+display:none;
+margin-top:20px;
+}
+
+#catBox img{
+width:250px;
+border-radius:10px;
+}
 
 .heart{
 position:fixed;
@@ -57,6 +72,7 @@ to{transform:translateY(-200px);opacity:0;}
 
 <div class="card" id="card">
 <h1>Martina, budeš môj valentín? ❤️</h1>
+
 <button id="yesBtn">Áno</button>
 <button id="noBtn">Nie</button>
 
@@ -67,34 +83,51 @@ to{transform:translateY(-200px);opacity:0;}
 </div>
 
 <script>
-if('serviceWorker' in navigator){
-navigator.serviceWorker.register('service-worker.js');
-}
+let attempts = 0;
+let yesSize = 1;
 
-let attempts=0;
-let yesSize=1;
-
-const noBtn=document.getElementById('noBtn');
-const yesBtn=document.getElementById('yesBtn');
-const card=document.getElementById('card');
-const catBox=document.getElementById('catBox');
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const card = document.getElementById("card");
+const catBox = document.getElementById("catBox");
 
 function moveNo(){
 attempts++;
-yesSize+=0.25;
-yesBtn.style.transform=`scale(${yesSize})`;
+yesSize += 0.25;
+yesBtn.style.transform = `scale(${yesSize})`;
 
-const rect=card.getBoundingClientRect();
-const x=Math.random()*(rect.width-100);
-const y=Math.random()*(rect.height-50);
+const rect = card.getBoundingClientRect();
+const x = Math.random() * (rect.width - 100);
+const y = Math.random() * (rect.height - 50);
 
-noBtn.style.left=x+"px";
-noBtn.style.top=y+"px";
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
 
-if(attempts>=5){
-catBox.style.display="block";
+if(attempts >= 5){
+catBox.style.display = "block";
 }
 }
 
-noBtn.addEventListener("mouseover",moveNo);
-no
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("click", moveNo);
+
+function spawnHearts(){
+for(let i=0;i<20;i++){
+const h = document.createElement("div");
+h.className = "heart";
+h.innerHTML = "❤️";
+h.style.left = Math.random() * window.innerWidth + "px";
+h.style.top = Math.random() * window.innerHeight + "px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),2000);
+}
+}
+
+yesBtn.onclick = () => {
+card.innerHTML = "<h1>YEESSS Martina! 💖</h1><h2>Teším sa na nás 😍</h2>";
+spawnHearts();
+};
+</script>
+
+</body>
+</html>
